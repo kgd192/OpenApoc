@@ -190,7 +190,7 @@ class Agent : public StateObject<Agent>,
 	// Get new goal for vehicle position or facing
 	bool getNewGoal(GameState &state);
 
-	void die(GameState &state, bool silent = false);
+	void die(GameState &state, bool silent = false, bool vehicleCrash = false);
 	bool isDead() const;
 	void handleDeath(GameState &state);
 

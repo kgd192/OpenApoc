@@ -943,7 +943,7 @@ bool Agent::getNewGoal(GameState &state)
 	return acquired;
 }
 
-void Agent::die(GameState &state, bool silent)
+void Agent::die(GameState &state, bool silent, bool vehicleCrash)
 {
 	auto thisRef = StateRef<Agent>{&state, shared_from_this()};
 
@@ -951,7 +951,8 @@ void Agent::die(GameState &state, bool silent)
 	modified_stats.health = 0;
 
 	// Remove from vehicle
-	if (currentVehicle)
+	// Dont do while dying from a vehicle crash to prevent iterator invalidation in vehicle.cpp
+	if (currentVehicle && !vehicleCrash)
 	{
 		currentVehicle->currentAgents.erase(thisRef);
 	}

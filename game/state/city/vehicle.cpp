@@ -1903,8 +1903,9 @@ void Vehicle::die(GameState &state, bool silent, StateRef<Vehicle> attacker)
 	// Dying will remove agent from current agents list
 	for (auto agent : currentAgents)
 	{
-		agent->die(state, true);
+		agent->die(state, true, true);
 	}
+	currentAgents.clear();
 
 	// Adjust relationships
 	if (attacker && !crashed)
